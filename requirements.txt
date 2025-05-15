@@ -19,3 +19,4 @@ langchain-groq
 # langchain-huggingface
 # huggingface-hub
 # sentence-transformers
+pytz  # <-- adicionada para suporte a timezone
