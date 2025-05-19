@@ -37,6 +37,13 @@ def webhook():
 
     return jsonify({'status': 'success'}), 200
 
+@app.route('/test', methods=['GET'])
+def test():
+    return jsonify({
+        'status': 'success',
+        'message': 'API está funcionando!',
+        'version': '1.0'
+    })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

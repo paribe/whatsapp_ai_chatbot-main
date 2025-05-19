@@ -1,0 +1,7 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  extraMounts:
+  - hostPath: /home/paribe/whatsapp_ai_chatbot-main/chroma_data  # Path on your WSL
+    containerPath: /mnt/data/chroma_data  # Path inside kind node

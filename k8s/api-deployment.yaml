@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wpp-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wpp-api
+  template:
+    metadata:
+      labels:
+        app: wpp-api
+    spec:
+      containers:
+        - name: api
+          image: wpp-api:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: api-env
+          volumeMounts:
+            - mountPath: /app/chroma_data
+              name: chroma-volume
+      volumes:
+        - name: chroma-volume
+          persistentVolumeClaim:
+            claimName: chroma-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wpp-api
+spec:
+  selector:
+    app: wpp-api
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: NodePort
